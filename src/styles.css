@@ -195,7 +195,7 @@ main {
 
 .hero-shell {
   position: relative;
-  height: 180vh;
+  height: 145vh;
 }
 
 .hero-sticky {
@@ -717,13 +717,14 @@ main {
   right: 22px;
   bottom: 20px;
   z-index: 95;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: linear-gradient(135deg, #25d366 0%, #17ad53 100%);
   color: #032113;
-  padding: 0.62rem;
   box-shadow: 0 10px 24px rgba(37, 211, 102, 0.35);
   transition:
     transform 0.22s ease,
@@ -736,18 +737,16 @@ main {
 }
 
 .floating-whatsapp__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
   color: #f6fff9;
-  border-radius: 999px;
 }
 
 .floating-whatsapp__icon svg {
-  width: 26px;
-  height: 26px;
+  width: 36px;
+  height: 36px;
 }
 
 .loading-screen {
@@ -804,6 +803,10 @@ main {
     grid-template-columns: 1fr;
   }
 
+  .hero-shell {
+    height: 125vh;
+  }
+
   .inner-grid {
     grid-template-columns: 1fr;
   }
@@ -826,12 +829,13 @@ main {
   .floating-whatsapp {
     right: 14px;
     bottom: 14px;
-    padding: 0.5rem;
+    width: 58px;
+    height: 58px;
   }
 
   .floating-whatsapp__icon,
   .floating-whatsapp__icon svg {
-    width: 34px;
-    height: 34px;
+    width: 33px;
+    height: 33px;
   }
 }

@@ -32,7 +32,8 @@ export default function LaptopRig({
     const anim = animationStateRef.current;
     const pointer = pointerRef.current;
     const scroll = THREE.MathUtils.clamp(scrollProgressRef.current, 0, 1);
-    const opacity = THREE.MathUtils.clamp(1 - scroll * 1.2, 0, 1);
+    // Keep a visible base opacity through the hero scroll so the section never feels blank.
+    const opacity = THREE.MathUtils.clamp(1 - scroll * 0.82, 0.2, 1);
 
     // Mouse-based parallax with timeline-driven oscillation.
     const pointerRotationY = THREE.MathUtils.degToRad(pointer.x * 6);
