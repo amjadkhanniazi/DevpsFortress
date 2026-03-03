@@ -9,6 +9,8 @@ const MENU_ITEMS = [
   { label: "Docs", to: "/docs" },
 ];
 
+const BRAND_LOGO_SRC = "/Logo/LOGODOF.png";
+
 const itemVariants = {
   hidden: { opacity: 0, x: 22 },
   show: { opacity: 1, x: 0 },
@@ -45,7 +47,7 @@ export default function Navbar() {
       >
         <div className="fortress-navbar__inner">
           <Link to="/" className="fortress-brand">
-            <span className="fortress-brand__glyph">DF</span>
+            <img src={BRAND_LOGO_SRC} alt="DevOps Fortress logo" className="fortress-brand__logo" />
             <span>DevOps Fortress</span>
           </Link>
 

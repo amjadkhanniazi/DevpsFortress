@@ -76,17 +76,14 @@ main {
   white-space: nowrap;
 }
 
-.fortress-brand__glyph {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.fortress-brand__logo {
+  display: block;
   width: 34px;
   height: 34px;
-  border-radius: 9px;
-  color: #0f1518;
-  background: linear-gradient(135deg, var(--cyan), #9cf6ff);
-  font-size: 0.8rem;
-  font-weight: 700;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.22);
 }
 
 .fortress-links {
@@ -496,20 +493,59 @@ main {
   gap: 24px;
 }
 
-.contact-badges {
-  margin-top: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.contact-panel {
+  display: grid;
+  align-content: start;
+  gap: 12px;
 }
 
-.contact-badges span {
-  border: 1px solid rgba(0, 240, 255, 0.28);
+.contact-panel .section-copy {
+  margin-top: 0;
+}
+
+.contact-links {
+  display: grid;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  border: 1px solid rgba(124, 232, 255, 0.25);
   border-radius: 999px;
-  padding: 0.4rem 0.75rem;
-  color: #c1f7ff;
+  padding: 0.44rem 0.75rem 0.44rem 0.5rem;
+  color: #d6eef2;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 0.87rem;
+  transition:
+    border-color 0.22s ease,
+    color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.contact-link:hover {
+  border-color: rgba(124, 232, 255, 0.52);
+  color: #b0f4ff;
   background: rgba(0, 240, 255, 0.08);
-  font-size: 0.82rem;
+}
+
+.contact-link__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  color: #defbff;
+  background: rgba(0, 240, 255, 0.14);
+}
+
+.contact-link__icon svg {
+  width: 16px;
+  height: 16px;
 }
 
 .contact-form {
@@ -592,12 +628,16 @@ main {
   width: min(1120px, 100%);
   margin: 0 auto;
   display: grid;
-  gap: 14px;
+  gap: 12px 14px;
   grid-template-columns: 1.2fr 1fr 1fr;
-  align-items: center;
+  grid-template-areas:
+    "brand links meta"
+    "brand social social";
+  align-items: start;
 }
 
 .site-footer__brand {
+  grid-area: brand;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -617,6 +657,7 @@ main {
 }
 
 .site-footer__links {
+  grid-area: links;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -632,8 +673,20 @@ main {
 }
 
 .site-footer__meta {
+  grid-area: meta;
   justify-self: end;
   text-align: right;
+}
+
+.site-footer__contact-link {
+  display: inline-block;
+  margin-bottom: 2px;
+  color: #91ebff;
+  font-size: 0.84rem;
+}
+
+.site-footer__contact-link:hover {
+  color: #b9f4ff;
 }
 
 .site-footer__meta p {
@@ -641,6 +694,60 @@ main {
   color: #8fa4ab;
   font-size: 0.82rem;
   line-height: 1.6;
+}
+
+.site-footer__social {
+  grid-area: social;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.site-footer__social a {
+  color: #c2d4da;
+  font-size: 0.86rem;
+}
+
+.site-footer__social a:hover {
+  color: #91ebff;
+}
+
+.floating-whatsapp {
+  position: fixed;
+  right: 22px;
+  bottom: 20px;
+  z-index: 95;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: linear-gradient(135deg, #25d366 0%, #17ad53 100%);
+  color: #032113;
+  padding: 0.62rem;
+  box-shadow: 0 10px 24px rgba(37, 211, 102, 0.35);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.floating-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(37, 211, 102, 0.48);
+}
+
+.floating-whatsapp__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: #f6fff9;
+  border-radius: 999px;
+}
+
+.floating-whatsapp__icon svg {
+  width: 26px;
+  height: 26px;
 }
 
 .loading-screen {
@@ -703,11 +810,28 @@ main {
 
   .site-footer__inner {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "brand"
+      "links"
+      "social"
+      "meta";
     gap: 16px;
   }
 
   .site-footer__meta {
     justify-self: start;
     text-align: left;
+  }
+
+  .floating-whatsapp {
+    right: 14px;
+    bottom: 14px;
+    padding: 0.5rem;
+  }
+
+  .floating-whatsapp__icon,
+  .floating-whatsapp__icon svg {
+    width: 34px;
+    height: 34px;
   }
 }
