@@ -704,11 +704,24 @@ main {
 }
 
 .site-footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(124, 232, 255, 0.24);
+  border-radius: 999px;
+  padding: 0.38rem 0.72rem;
+  background: rgba(255, 255, 255, 0.02);
   color: #c2d4da;
   font-size: 0.86rem;
+  transition:
+    border-color 0.22s ease,
+    color 0.22s ease,
+    background-color 0.22s ease;
 }
 
 .site-footer__social a:hover {
+  border-color: rgba(124, 232, 255, 0.48);
+  background: rgba(0, 240, 255, 0.08);
   color: #91ebff;
 }
 

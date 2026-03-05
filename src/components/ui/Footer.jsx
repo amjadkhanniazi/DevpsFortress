@@ -10,6 +10,7 @@ const FOOTER_LINKS = [
 const BRAND_LOGO_SRC = "/Logo/LOGODOF.png";
 const WHATSAPP_DISPLAY_NUMBER = "03228409304";
 const WHATSAPP_CHAT_LINK = "https://wa.me/923228409304?text=Hello%20DevOps%20Fortress";
+const GITHUB_PROFILE_LINK = "https://github.com/DevOps-Fortress";
 
 const SOCIAL_LINKS = [
   {
@@ -23,6 +24,10 @@ const SOCIAL_LINKS = [
   {
     label: "Instagram",
     href: "https://www.instagram.com/riaz.naeem.71/",
+  },
+  {
+    label: "GitHub",
+    href: GITHUB_PROFILE_LINK,
   },
 ];
 
