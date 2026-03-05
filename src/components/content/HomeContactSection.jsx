@@ -115,7 +115,7 @@ export default function HomeContactSection() {
         <div className="contact-panel">
           <p className="section-kicker">Contact</p>
           <h2 className="section-title">Contact Us</h2>
-          <p className="section-copy">Reach out using any channel below.</p>
+          <p className="section-copy">Reach out using any channel below.(Contact form not working Yet)</p>
 
           <div className="contact-links" aria-label="Contact channels">
             {CONTACT_LINKS.map((link) => (
