@@ -29,4 +29,3 @@ jobs:
           protocol: ftps
           local-dir: ./dist/
           server-dir: /domains/devopsfortress.com/public_html/
-          dangerous-clean-slate: true
