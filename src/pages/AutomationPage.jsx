@@ -26,6 +26,7 @@ export default function AutomationPage() {
       title="Engineering Automation That Scales Delivery and Reliability"
       intro="Our automation practice standardizes pipelines, infrastructure, and operations to deliver faster changes with stronger safety controls."
       blocks={blocks}
+      variant="steps"
     />
   );
 }

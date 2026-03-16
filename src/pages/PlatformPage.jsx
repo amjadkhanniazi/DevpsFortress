@@ -17,6 +17,14 @@ const blocks = [
     title: "Toolchain Integration",
     text: "Connect Git, CI/CD, container registries, and runtime infrastructure into a cohesive platform that supports secure and predictable releases.",
   },
+  {
+    title: "Cost & Resource Governance",
+    text: "Apply tagging standards, budget alerts, and rightsizing practices with chargeback visibility so cloud spend stays controlled without slowing releases.",
+  },
+  {
+    title: "Compliance-Ready Controls",
+    text: "Align platform controls to ISO 27001, SOC 2, and PCI-DSS with continuous evidence collection and audit-ready reporting.",
+  },
 ];
 
 export default function PlatformPage() {
@@ -26,6 +34,7 @@ export default function PlatformPage() {
       title="Secure Platform Engineering for Cloud-Scale Delivery"
       intro="DevOps Fortress platform services align cloud infrastructure, release systems, and security controls so teams can ship faster with confidence."
       blocks={blocks}
+      variant="columns"
     />
   );
 }

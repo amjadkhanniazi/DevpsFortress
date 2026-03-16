@@ -45,6 +45,38 @@ export const fortressContent = {
         "Network architecture, hardening, and layered security controls for resilient, high-performance operations.",
     },
   ],
+  serviceHighlights: [
+    {
+      title: "Discovery & Architecture Review",
+      description:
+        "Assess your current delivery pipeline, cloud posture, and risks, then define a practical roadmap with milestones.",
+    },
+    {
+      title: "Platform Build & Automation",
+      description:
+        "Implement secure landing zones, IaC modules, and CI/CD pipelines with policy gates and artifact integrity.",
+    },
+    {
+      title: "Security Hardening & VAPT",
+      description:
+        "Embed DevSecOps scanning, conduct penetration testing, and remediate misconfigurations across cloud and apps.",
+    },
+    {
+      title: "Cloud Migration & Optimization",
+      description:
+        "Plan and execute migrations with cost governance, performance tuning, and reliability guardrails.",
+    },
+    {
+      title: "Observability & Incident Readiness",
+      description:
+        "Deploy logging, metrics, and alerting with runbooks and automated rollback to reduce downtime.",
+    },
+    {
+      title: "Managed Support & Enablement",
+      description:
+        "Provide ongoing support, documentation, and enablement so teams can self-serve securely.",
+    },
+  ],
   capabilities: [
     "Security Vulnerability Scanning",
     "BI Consulting and Smart Implementation",
@@ -56,56 +88,6 @@ export const fortressContent = {
     "Compliance-focused delivery: ISO 27001, PCI-DSS, SOC 2",
     "Hands-on expertise across GitHub, GitLab, CI/CD, Docker, Kubernetes, Terraform, and Ansible",
     "Proven support model for distributed and global engineering teams",
-  ],
-  faqs: [
-    {
-      q: "Do you support both GitHub and GitLab integration with CI/CD pipelines?",
-      a: "Yes. We implement end-to-end CI/CD with GitHub or GitLab and integrate Jenkins, Docker, and Kubernetes for secure automated deployments.",
-    },
-    {
-      q: "Can you migrate infrastructure to AWS, Azure, or Google Cloud?",
-      a: "Yes. We provide cloud migration, landing zone setup, IaC implementation, security baselines, and deployment automation.",
-    },
-    {
-      q: "What penetration testing coverage do you provide?",
-      a: "We provide black-box and white-box testing across web apps, APIs, networks, and cloud systems aligned with OWASP Top 10 and industry standards.",
-    },
-    {
-      q: "How do you secure Kubernetes deployments?",
-      a: "We apply RBAC hardening, secrets management, container image scanning, and network policy enforcement for cluster protection.",
-    },
-    {
-      q: "Do you provide real-time vulnerability scanning?",
-      a: "Yes. Our DevSecOps pipelines continuously scan for misconfigurations, exposed ports, and known vulnerabilities on code changes and deployments.",
-    },
-    {
-      q: "Can security checks be embedded directly into CI/CD?",
-      a: "Yes. We embed code analysis, artifact scanning, policy gates, and post-deployment monitoring into each stage.",
-    },
-    {
-      q: "Do you provide application development as well as infrastructure services?",
-      a: "Yes. We build custom applications and also design and operate the secure infrastructure they run on.",
-    },
-    {
-      q: "What scripting and automation stacks do you typically use?",
-      a: "We commonly use Shell, Python, and YAML plus Terraform and Ansible for repeatable infrastructure and operations automation.",
-    },
-    {
-      q: "How do you ensure ISO 27001 and PCI-DSS compliance?",
-      a: "We combine automated compliance checks, posture dashboards, and remediation workflows to keep environments audit-ready.",
-    },
-    {
-      q: "Can you implement Infrastructure as Code for cloud environments?",
-      a: "Yes. We implement Terraform and cloud-native templates to improve consistency, scalability, and disaster recovery readiness.",
-    },
-    {
-      q: "Do you monitor network traffic and secure internal communication?",
-      a: "Yes. We deploy firewall controls, traffic monitoring, VPN access, and secure service-to-service communication patterns.",
-    },
-    {
-      q: "What is your onboarding process for new clients?",
-      a: "We start with a discovery session, review your current stack, and deliver a practical execution roadmap for DevOps, security, and cloud optimization.",
-    },
   ],
   cta: {
     title: "Let's Build the Future Together",

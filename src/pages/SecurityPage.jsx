@@ -26,6 +26,7 @@ export default function SecurityPage() {
       title="Cybersecurity and Compliance Built Into Every Delivery Stage"
       intro="We combine security engineering, continuous monitoring, and compliance automation to reduce risk without slowing software throughput."
       blocks={blocks}
+      variant="list"
     />
   );
 }

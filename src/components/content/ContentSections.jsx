@@ -56,16 +56,16 @@ export default function ContentSections() {
         </div>
       </section>
 
-      <section id="docs" className="info-section">
+      <section id="service-model" className="info-section">
         <div className="section-shell">
-          <p className="section-kicker">FAQ</p>
-          <h2 className="section-title">Frequently Asked Questions</h2>
-          <div className="faq-stack">
-            {fortressContent.faqs.map((faq) => (
-              <details key={faq.q} className="faq-item">
-                <summary>{faq.q}</summary>
-                <p>{faq.a}</p>
-              </details>
+          <p className="section-kicker">Service Model</p>
+          <h2 className="section-title">How We Deliver Results</h2>
+          <div className="service-grid">
+            {fortressContent.serviceHighlights.map((item) => (
+              <article key={item.title} className="service-card">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
             ))}
           </div>
         </div>
