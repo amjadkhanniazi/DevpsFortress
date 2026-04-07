@@ -149,11 +149,9 @@ main {
 .hamburger-line:nth-child(1) {
   top: 14px;
 }
-
 .hamburger-line:nth-child(2) {
   top: 22px;
 }
-
 .hamburger-line:nth-child(3) {
   top: 30px;
 }
@@ -564,45 +562,14 @@ main {
   margin-top: 0;
 }
 
-.contact-links {
-  display: grid;
-  gap: 10px;
-  margin-top: 2px;
-}
-
 .contact-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 150px;
-  border: 1px solid rgba(124, 232, 255, 0.25);
-  border-radius: 999px;
-  padding: 0.44rem 0.75rem 0.44rem 0.5rem;
-  color: #d6eef2;
-  background: rgba(255, 255, 255, 0.02);
-  font-size: 0.87rem;
-  transition:
-    border-color 0.22s ease,
-    color 0.22s ease,
-    background-color 0.22s ease;
+  padding: 10px;
 }
 
 .contact-link:hover {
   border-color: rgba(124, 232, 255, 0.52);
   color: #b0f4ff;
   background: rgba(0, 240, 255, 0.08);
-}
-
-.contact-link__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  color: #defbff;
-  background: rgba(0, 240, 255, 0.14);
 }
 
 .contact-link__icon svg {
@@ -785,6 +752,7 @@ main {
   padding: 0 22px 120px;
 }
 
+/* ── Footer ── */
 .site-footer {
   border-top: 1px solid rgba(124, 232, 255, 0.18);
   background: linear-gradient(180deg, rgba(12, 13, 14, 0.98) 0%, #090909 100%);
@@ -813,13 +781,13 @@ main {
 .site-footer__brand h3 {
   margin: 0;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.96rem;
+  font-size: 1.04rem;
 }
 
 .site-footer__brand p {
   margin: 6px 0 0;
   color: #9bb0b6;
-  font-size: 0.86rem;
+  font-size: 0.92rem;
   line-height: 1.55;
 }
 
@@ -832,7 +800,7 @@ main {
 
 .site-footer__links a {
   color: #c2d4da;
-  font-size: 0.88rem;
+  font-size: 14px;
 }
 
 .site-footer__links a:hover {
@@ -849,7 +817,7 @@ main {
   display: inline-block;
   margin-bottom: 2px;
   color: #91ebff;
-  font-size: 0.84rem;
+  font-size: 0.9rem;
 }
 
 .site-footer__contact-link:hover {
@@ -859,38 +827,45 @@ main {
 .site-footer__meta p {
   margin: 0;
   color: #8fa4ab;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   line-height: 1.6;
 }
 
+/* ── Social Icon Buttons (FIXED) ── */
 .site-footer__social {
   grid-area: social;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+  align-items: center;
 }
 
-.site-footer__social a {
+.social-icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  padding: 0.38rem 0.72rem;
-  background: rgba(255, 255, 255, 0.02);
-  color: #c2d4da;
-  font-size: 0.86rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(124, 232, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: #9bb0b6;
   transition:
-    border-color 0.22s ease,
     color 0.22s ease,
-    background-color 0.22s ease;
+    border-color 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
 }
 
-.site-footer__social a:hover {
-  border-color: rgba(124, 232, 255, 0.48);
-  background: rgba(0, 240, 255, 0.08);
-  color: #91ebff;
+.social-icon-btn:hover {
+  color: var(--hover-color, #00f0ff);
+  border-color: var(--hover-color, #00f0ff);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-3px);
 }
 
+/* ── Floating WhatsApp ── */
 .floating-whatsapp {
   position: fixed;
   right: 22px;
@@ -928,6 +903,7 @@ main {
   height: 36px;
 }
 
+/* ── Loading Screen ── */
 .loading-screen {
   position: fixed;
   inset: 0;
@@ -941,6 +917,7 @@ main {
   display: block;
 }
 
+/* ── Responsive ── */
 @media (max-width: 900px) {
   .fortress-links--desktop {
     display: none;
@@ -969,7 +946,6 @@ main {
   .service-grid {
     grid-template-columns: 1fr;
   }
-
   .docs-grid {
     grid-template-columns: 1fr;
   }
@@ -987,27 +963,21 @@ main {
   .section-shell--cta {
     padding: 24px;
   }
-
   .cta-row {
     flex-direction: column;
   }
-
   .contact-layout {
     grid-template-columns: 1fr;
   }
-
   .hero-shell {
     height: 125vh;
   }
-
   .inner-grid {
     grid-template-columns: 1fr;
   }
-
   .inner-columns {
     grid-template-columns: 1fr;
   }
-
   .inner-steps__item {
     grid-template-columns: 1fr;
   }

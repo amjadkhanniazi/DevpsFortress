@@ -1,15 +1,16 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const MENU_ITEMS = [
-  { label: "Platform", to: "/platform" },
-  { label: "Security", to: "/security" },
-  { label: "Automation", to: "/automation" },
-  { label: "Docs", to: "/docs" },
+  { label: 'Home', to: '/' },
+  { label: 'Platform', to: '/platform' },
+  { label: 'Security', to: '/security' },
+  { label: 'Automation', to: '/automation' },
+  { label: 'Docs', to: '/docs' },
 ];
 
-const BRAND_LOGO_SRC = "/Logo/LOGODOF.png";
+const BRAND_LOGO_SRC = '/Logo/LOGODOF.png';
 
 const itemVariants = {
   hidden: { opacity: 0, x: 22 },
@@ -20,13 +21,16 @@ export default function Navbar() {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isHomeRoute = useMemo(() => location.pathname === "/", [location.pathname]);
+  const isHomeRoute = useMemo(
+    () => location.pathname === '/',
+    [location.pathname],
+  );
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 36);
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -39,15 +43,25 @@ export default function Navbar() {
         className="fortress-navbar"
         animate={{
           height: isScrolled ? 64 : 84,
-          backgroundColor: isScrolled ? "rgba(15,16,18,0.82)" : "rgba(15,16,18,0.58)",
-          borderColor: isScrolled ? "rgba(0,240,255,0.42)" : "rgba(255,255,255,0.08)",
-          boxShadow: isScrolled ? "0 0 32px rgba(0,240,255,0.2)" : "0 0 0 rgba(0,240,255,0)",
+          backgroundColor: isScrolled
+            ? 'rgba(15,16,18,0.82)'
+            : 'rgba(15,16,18,0.58)',
+          borderColor: isScrolled
+            ? 'rgba(0,240,255,0.42)'
+            : 'rgba(255,255,255,0.08)',
+          boxShadow: isScrolled
+            ? '0 0 32px rgba(0,240,255,0.2)'
+            : '0 0 0 rgba(0,240,255,0)',
         }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
       >
         <div className="fortress-navbar__inner">
           <Link to="/" className="fortress-brand">
-            <img src={BRAND_LOGO_SRC} alt="DevOps Fortress logo" className="fortress-brand__logo" />
+            <img
+              src={BRAND_LOGO_SRC}
+              alt="DevOps Fortress logo"
+              className="fortress-brand__logo"
+            />
             <span>DevOps Fortress</span>
           </Link>
 
@@ -56,7 +70,9 @@ export default function Navbar() {
               <NavLink
                 key={item.label}
                 to={item.to}
-                className={({ isActive }) => `fortress-link${isActive ? " fortress-link--active" : ""}`}
+                className={({ isActive }) =>
+                  `fortress-link${isActive ? ' fortress-link--active' : ''}`
+                }
               >
                 {item.label}
               </NavLink>
@@ -80,7 +96,9 @@ export default function Navbar() {
           >
             <motion.span
               className="hamburger-line"
-              animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              animate={
+                isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }
+              }
               transition={{ duration: 0.25 }}
             />
             <motion.span
@@ -90,7 +108,9 @@ export default function Navbar() {
             />
             <motion.span
               className="hamburger-line"
-              animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+              animate={
+                isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }
+              }
               transition={{ duration: 0.25 }}
             />
           </button>
@@ -101,10 +121,10 @@ export default function Navbar() {
         {isMobileMenuOpen ? (
           <motion.aside
             className="mobile-menu"
-            initial={{ x: "100%", rotateY: 24, opacity: 0 }}
-            animate={{ x: "0%", rotateY: 0, opacity: 1 }}
-            exit={{ x: "100%", rotateY: 16, opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            initial={{ x: '100%', rotateY: 24, opacity: 0 }}
+            animate={{ x: '0%', rotateY: 0, opacity: 1 }}
+            exit={{ x: '100%', rotateY: 16, opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
             <motion.div
               className="mobile-menu__items"
@@ -117,7 +137,7 @@ export default function Navbar() {
                 <motion.div
                   key={item.label}
                   variants={itemVariants}
-                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  transition={{ duration: 0.22, ease: 'easeOut' }}
                 >
                   <NavLink
                     to={item.to}
@@ -128,7 +148,10 @@ export default function Navbar() {
                   </NavLink>
                 </motion.div>
               ))}
-              <motion.div variants={itemVariants} transition={{ duration: 0.22, ease: "easeOut" }}>
+              <motion.div
+                variants={itemVariants}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+              >
                 {isHomeRoute ? (
                   <a
                     href="#contact"
