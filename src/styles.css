@@ -556,14 +556,32 @@ main {
   display: grid;
   align-content: start;
   gap: 12px;
+  position: relative;
+  isolation: isolate;
+}
+
+.contact-panel::before {
+  border-radius: 5%;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('./assets/watermark.jpg') center center / cover no-repeat;
+  opacity: 0.4;
+  filter: brightness(1.15);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .contact-panel .section-copy {
   margin-top: 0;
 }
 
-.contact-link {
-  padding: 10px;
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
 }
 
 .contact-link:hover {
@@ -579,7 +597,11 @@ main {
 
 .contact-form {
   display: grid;
-  gap: 10px;
+  gap: 14px;
+}
+
+.contact-form button {
+  margin-top: 8px;
 }
 
 .contact-form label {
@@ -837,8 +859,9 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 14px;
   align-items: center;
+  margin-top: 6px;
 }
 
 .social-icon-btn {
@@ -856,6 +879,8 @@ main {
     border-color 0.22s ease,
     background 0.22s ease,
     transform 0.22s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .social-icon-btn:hover {
