@@ -10,6 +10,8 @@ import DocsPage from './pages/DocsPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import PlatformPage from './pages/PlatformPage';
+import ServiceDetail from './pages/ServiceDetail';
+import ServicesPage from './pages/ServicesPage';
 import SecurityPage from './pages/SecurityPage';
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
         <Route path="/security" element={<SecurityPage />} />
         <Route path="/automation" element={<AutomationPage />} />
         <Route path="/docs" element={<DocsPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/:serviceId" element={<ServiceDetail />} />
         <Route />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

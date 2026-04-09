@@ -7,6 +7,7 @@ const MENU_ITEMS = [
   { label: 'Platform', to: '/platform' },
   { label: 'Security', to: '/security' },
   { label: 'Automation', to: '/automation' },
+  { label: 'Services', to: '/services' },
   { label: 'Docs', to: '/docs' },
 ];
 

@@ -2,8 +2,6 @@ import {
   RiAlertLine,
   RiCodeSSlashLine,
   RiCpuLine,
-  RiGitBranchLine,
-  RiServerLine,
   RiShieldLine,
 } from 'react-icons/ri';
 import {
@@ -15,27 +13,24 @@ import {
   SiKubernetes,
   SiTerraform,
 } from 'react-icons/si';
+import { Link } from 'react-router-dom';
+import SERVICES from '../../data/services';
 import { fortressContent } from '../../content/devopsFortressContent';
-
-const serviceTitleIcons = {
-  'DevOps and DevSecOps Engineering': RiGitBranchLine,
-  'Cloud Infrastructure and Deployment': RiServerLine,
-};
 
 const serviceHighlightIcons = {
   'Security Hardening & VAPT': RiShieldLine,
   'Observability & Incident Readiness': RiAlertLine,
 };
 
-const capabilityIcons = {
-  'GitHub Actions': SiGithubactions,
-  GitLab: SiGitlab,
-  Jenkins: SiJenkins,
-  Docker: SiDocker,
-  Kubernetes: SiKubernetes,
-  Terraform: SiTerraform,
-  Ansible: SiAnsible,
-};
+const TECH_STACK_BADGES = [
+  { label: 'GitHub Actions', Icon: SiGithubactions },
+  { label: 'GitLab', Icon: SiGitlab },
+  { label: 'Jenkins', Icon: SiJenkins },
+  { label: 'Docker', Icon: SiDocker },
+  { label: 'Kubernetes', Icon: SiKubernetes },
+  { label: 'Terraform', Icon: SiTerraform },
+  { label: 'Ansible', Icon: SiAnsible },
+];
 
 export default function ContentSections() {
   return (
@@ -63,12 +58,17 @@ export default function ContentSections() {
             Core Delivery Areas
           </h2>
           <div className="service-grid">
-            {fortressContent.services.map((service) => {
+            {SERVICES.map((service) => {
               return (
-                <article key={service.title} className="service-card">
+                <Link
+                  key={service.id}
+                  to={`/services/${service.id}`}
+                  className="service-card service-card--linked"
+                >
                   <h3>{service.title}</h3>
-                  <p>{service.description}</p>
-                </article>
+                  <p>{service.shortDesc}</p>
+                  <span className="service-card__cta">Learn more →</span>
+                </Link>
               );
             })}
           </div>
@@ -82,17 +82,10 @@ export default function ContentSections() {
             <RiCpuLine size={30} aria-hidden="true" /> Advanced Capabilities
           </h2>
           <div className="capability-list">
-            {fortressContent.capabilities.map((item) => {
-              const Icon = capabilityIcons[item];
-
+            {TECH_STACK_BADGES.map(({ label, Icon }) => {
               return (
-                <div key={item} className="capability-pill">
-                  {Icon ? (
-                    <>
-                      <Icon size={16} aria-hidden="true" />{' '}
-                    </>
-                  ) : null}
-                  {item}
+                <div key={label} className="capability-pill">
+                  <Icon size={16} aria-hidden="true" /> {label}
                 </div>
               );
             })}

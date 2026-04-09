@@ -1,8 +1,9 @@
-import { motion } from "framer-motion";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { fortressContent } from "../../content/devopsFortressContent";
+import { motion } from 'framer-motion';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { fortressContent } from '../../content/devopsFortressContent';
+import { useNavigate } from 'react-router-dom';
 
-const CinematicHeroScene = lazy(() => import("./CinematicHeroScene"));
+const CinematicHeroScene = lazy(() => import('./CinematicHeroScene'));
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -13,6 +14,8 @@ export default function HeroSection() {
   const [liteMode, setLiteMode] = useState(false);
   const [projectionReady, setProjectionReady] = useState(false);
   const [headlineReady, setHeadlineReady] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let rafId = 0;
@@ -25,7 +28,8 @@ export default function HeroSection() {
       }
 
       const sectionTop = sectionRef.current.offsetTop;
-      const travelDistance = sectionRef.current.offsetHeight - window.innerHeight;
+      const travelDistance =
+        sectionRef.current.offsetHeight - window.innerHeight;
       const raw = (window.scrollY - sectionTop) / Math.max(travelDistance, 1);
       scrollProgressRef.current = clamp(raw, 0, 1);
     };
@@ -38,29 +42,31 @@ export default function HeroSection() {
     };
 
     onScrollOrResize();
-    window.addEventListener("scroll", onScrollOrResize, { passive: true });
-    window.addEventListener("resize", onScrollOrResize);
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
 
     return () => {
       if (rafId) {
         window.cancelAnimationFrame(rafId);
       }
-      window.removeEventListener("scroll", onScrollOrResize);
-      window.removeEventListener("resize", onScrollOrResize);
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
     };
   }, []);
 
   useEffect(() => {
     const evaluateDevice = () => {
-      const mobileWidth = window.matchMedia("(max-width: 900px)").matches;
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const mobileWidth = window.matchMedia('(max-width: 900px)').matches;
+      const reducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
       const lowCpu = (navigator.hardwareConcurrency || 8) <= 4;
       setLiteMode(mobileWidth || reducedMotion || lowCpu);
     };
 
     evaluateDevice();
-    window.addEventListener("resize", evaluateDevice);
-    return () => window.removeEventListener("resize", evaluateDevice);
+    window.addEventListener('resize', evaluateDevice);
+    return () => window.removeEventListener('resize', evaluateDevice);
   }, []);
 
   const onPointerMove = (event) => {
@@ -99,22 +105,24 @@ export default function HeroSection() {
         <div className="hero-overlay">
           <motion.p
             className="hero-tagline"
-            initial={{ opacity: 0, y: 14, filter: "blur(10px)" }}
+            initial={{ opacity: 0, y: 14, filter: 'blur(10px)' }}
             animate={
               projectionReady
-                ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                : { opacity: 0, y: 14, filter: "blur(10px)" }
+                ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+                : { opacity: 0, y: 14, filter: 'blur(10px)' }
             }
-            transition={{ duration: 0.9, ease: "easeOut" }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
           >
             {fortressContent.hero.tagline}
           </motion.p>
 
           <motion.h1
-            className={`hero-heading${headlineReady ? " hero-heading--pulse" : ""}`}
+            className={`hero-heading${headlineReady ? ' hero-heading--pulse' : ''}`}
             initial={{ opacity: 0, y: 20 }}
-            animate={headlineReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            animate={
+              headlineReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             {fortressContent.hero.title}
           </motion.h1>
@@ -122,8 +130,10 @@ export default function HeroSection() {
           <motion.p
             className="hero-subtitle"
             initial={{ opacity: 0, y: 20 }}
-            animate={headlineReady ? { opacity: 0.95, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.08, ease: "easeOut" }}
+            animate={
+              headlineReady ? { opacity: 0.95, y: 0 } : { opacity: 0, y: 20 }
+            }
+            transition={{ duration: 0.8, delay: 0.08, ease: 'easeOut' }}
           >
             {fortressContent.hero.subtitle}
           </motion.p>
@@ -131,21 +141,32 @@ export default function HeroSection() {
           <motion.div
             className="hero-cta-row"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={headlineReady ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", damping: 14, stiffness: 150, delay: 0.16 }}
+            animate={
+              headlineReady
+                ? { opacity: 1, scale: 1, y: 0 }
+                : { opacity: 0, scale: 0.9, y: 20 }
+            }
+            transition={{
+              type: 'spring',
+              damping: 14,
+              stiffness: 150,
+              delay: 0.16,
+            }}
           >
-            <motion.button
+            <motion.a
+              href="#contact"
               className="cta-button cta-button--primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
               Launch Fortress
-            </motion.button>
+            </motion.a>
 
             <motion.button
               className="cta-button cta-button--secondary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/services')}
             >
               View Blueprint
             </motion.button>
