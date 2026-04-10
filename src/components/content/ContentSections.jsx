@@ -17,11 +17,6 @@ import { Link } from 'react-router-dom';
 import SERVICES from '../../data/services';
 import { fortressContent } from '../../content/devopsFortressContent';
 
-const serviceHighlightIcons = {
-  'Security Hardening & VAPT': RiShieldLine,
-  'Observability & Incident Readiness': RiAlertLine,
-};
-
 const TECH_STACK_BADGES = [
   { label: 'GitHub Actions', Icon: SiGithubactions },
   { label: 'GitLab', Icon: SiGitlab },

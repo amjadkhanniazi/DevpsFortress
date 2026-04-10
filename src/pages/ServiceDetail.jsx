@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SERVICES from '../data/services';
 
@@ -22,6 +22,25 @@ function ServiceHeroImage({ service }) {
 export default function ServiceDetail() {
   const { serviceId } = useParams();
   const service = SERVICES.find((item) => item.id === serviceId);
+  const contentLines = service?.fullDesc
+    ? service.fullDesc
+        .split('\n')
+        .map((line) => line.trim())
+        .filter(Boolean)
+    : [];
+  const isSectionHeading = (line) =>
+    line.endsWith('?') ||
+    (!line.includes(':') && line.length <= 72 && !line.endsWith('.'));
+  const leadParagraphIndex = contentLines.findIndex(
+    (line) => !isSectionHeading(line)
+  );
+  const leadParagraph =
+    leadParagraphIndex >= 0
+      ? contentLines[leadParagraphIndex]
+      : contentLines[0] || '';
+  const remainingLines = contentLines.filter(
+    (_, index) => index !== leadParagraphIndex
+  );
 
   if (!service) {
     return (
@@ -34,7 +53,7 @@ export default function ServiceDetail() {
               The service you requested could not be found.
             </p>
             <Link to="/services" className="service-detail__back">
-              ← All Services
+              &larr; All Services
             </Link>
           </div>
         </section>
@@ -49,16 +68,36 @@ export default function ServiceDetail() {
         <div className="service-detail-hero__overlay">
           <div className="section-shell">
             <Link to="/services" className="service-detail__back">
-              ← All Services
+              &larr; All Services
             </Link>
             <h1 className="section-title">{service.title}</h1>
-            <p className="section-copy">{service.fullDesc}</p>
+            <p className="section-copy">{leadParagraph}</p>
           </div>
         </div>
       </section>
 
       <section className="inner-body">
         <div className="section-shell">
+          {remainingLines.length > 0 ? (
+            <div className="service-detail__overview">
+              {remainingLines.map((line) => {
+                if (isSectionHeading(line)) {
+                  return (
+                    <h2 key={line} className="service-detail__subheading">
+                      {line}
+                    </h2>
+                  );
+                }
+
+                return (
+                  <p key={line} className="section-copy">
+                    {line}
+                  </p>
+                );
+              })}
+            </div>
+          ) : null}
+
           <h2 className="section-title service-detail__section-title">
             What&apos;s Included
           </h2>
@@ -100,3 +139,4 @@ export default function ServiceDetail() {
     </main>
   );
 }
+

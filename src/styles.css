@@ -655,7 +655,8 @@ main {
 }
 
 .inner-body {
-  padding: 0 22px 72px;
+  padding: 20px 22px 72px;
+  width: 100%;
 }
 
 .inner-grid {
@@ -1047,7 +1048,9 @@ main {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.22s ease, border-color 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease;
 }
 
 .service-card--linked:hover {
@@ -1088,12 +1091,14 @@ main {
 /* Service detail hero */
 .service-detail-hero {
   position: relative;
-  height: 420px;
+  min-height: 420px;
   overflow: hidden;
   margin-top: 0;
 }
 
 .service-detail-hero__img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1102,11 +1107,11 @@ main {
 }
 
 .service-detail-hero__overlay {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: flex;
   align-items: flex-end;
-  padding: 100px 22px 48px;
+  min-height: 420px;
+  padding: 140px 22px 48px;
 }
 
 .service-detail__back {
@@ -1128,6 +1133,26 @@ main {
   font-size: 1.4rem;
 }
 
+.service-detail__overview {
+  margin-bottom: 36px;
+}
+
+.service-detail__overview .section-copy:first-child {
+  margin-top: 0;
+}
+
+.service-detail__subheading {
+  margin: 24px 0 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.08rem;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.service-detail__overview .service-detail__subheading:first-child {
+  margin-top: 0;
+}
+
 .service-detail__cta {
   margin-top: 36px;
   border: 1px solid rgba(0, 240, 255, 0.2);
@@ -1143,6 +1168,11 @@ main {
 /* Responsive */
 @media (max-width: 900px) {
   .service-detail-hero {
-    height: 320px;
+    min-height: 320px;
+  }
+
+  .service-detail-hero__overlay {
+    min-height: 320px;
+    padding: 120px 22px 36px;
   }
 }
