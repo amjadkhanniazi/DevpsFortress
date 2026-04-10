@@ -1126,17 +1126,18 @@ main {
 
 .services-carousel {
   margin-top: 24px;
-  overflow: hidden;
 }
 
 .services-carousel__track {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
   transition: transform 0.35s ease;
 }
 
 .services-carousel__slide {
   min-width: 0;
-  padding: 0 7px;
+  padding: 0;
 }
 
 .service-card--media {
@@ -1240,10 +1241,20 @@ main {
 }
 
 /* Responsive */
+@media (max-width: 1080px) {
+  .services-carousel__track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .services-carousel__top {
     align-items: start;
     flex-direction: column;
+  }
+
+  .services-carousel__track {
+    grid-template-columns: 1fr;
   }
 
   .service-detail-hero {
