@@ -1,10 +1,7 @@
-import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ScrollToTop from './components/layout/ScrollToTop';
 import Footer from './components/ui/Footer';
 import Navbar from './components/ui/Navbar';
-import LoadingScreen from './components/ui/LoadingScreen';
 import AutomationPage from './pages/AutomationPage';
 import DocsPage from './pages/DocsPage';
 import HomePage from './pages/HomePage';
@@ -15,8 +12,6 @@ import ServicesPage from './pages/ServicesPage';
 import SecurityPage from './pages/SecurityPage';
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
   return (
     <>
       <ScrollToTop />
@@ -33,12 +28,6 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
-
-      <AnimatePresence>
-        {loading ? (
-          <LoadingScreen key="loading" onComplete={() => setLoading(false)} />
-        ) : null}
-      </AnimatePresence>
     </>
   );
 }

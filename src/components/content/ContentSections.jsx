@@ -1,5 +1,8 @@
+﻿import { useEffect, useState } from 'react';
 import {
   RiAlertLine,
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
   RiCodeSSlashLine,
   RiCpuLine,
   RiShieldLine,
@@ -28,6 +31,50 @@ const TECH_STACK_BADGES = [
 ];
 
 export default function ContentSections() {
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const [cardsPerView, setCardsPerView] = useState(3);
+
+  useEffect(() => {
+    const updateCardsPerView = () => {
+      if (window.innerWidth <= 720) {
+        setCardsPerView(1);
+        return;
+      }
+
+      if (window.innerWidth <= 1080) {
+        setCardsPerView(2);
+        return;
+      }
+
+      setCardsPerView(3);
+    };
+
+    updateCardsPerView();
+    window.addEventListener('resize', updateCardsPerView);
+
+    return () => window.removeEventListener('resize', updateCardsPerView);
+  }, []);
+
+  useEffect(() => {
+    const maxIndex = Math.max(SERVICES.length - cardsPerView, 0);
+    setActiveServiceIndex((currentIndex) => Math.min(currentIndex, maxIndex));
+  }, [cardsPerView]);
+
+  const maxServiceIndex = Math.max(SERVICES.length - cardsPerView, 0);
+  const serviceSlideWidth = 100 / cardsPerView;
+
+  const goToPreviousServices = () => {
+    setActiveServiceIndex((currentIndex) =>
+      currentIndex === 0 ? maxServiceIndex : currentIndex - 1,
+    );
+  };
+
+  const goToNextServices = () => {
+    setActiveServiceIndex((currentIndex) =>
+      currentIndex >= maxServiceIndex ? 0 : currentIndex + 1,
+    );
+  };
+
   return (
     <div className="content-flow">
       <section id="about" className="info-section">
@@ -47,25 +94,66 @@ export default function ContentSections() {
 
       <section id="services" className="info-section info-section--alt">
         <div className="section-shell">
-          <p className="section-kicker">Services</p>
-          <h2 className="section-title">
-            <RiCodeSSlashLine size={30} aria-hidden="true" />
-            Core Delivery Areas
-          </h2>
-          <div className="service-grid">
-            {SERVICES.map((service) => {
-              return (
-                <Link
+          <div className="services-carousel__top">
+            <div>
+              <p className="section-kicker">Services</p>
+              <h2 className="section-title">
+                <RiCodeSSlashLine size={30} aria-hidden="true" />
+                Core Delivery Areas
+              </h2>
+            </div>
+
+            {/* <div className="services-carousel__controls">
+              <button
+                type="button"
+                className="services-carousel__button"
+                onClick={goToPreviousServices}
+                aria-label="Previous services"
+              >
+                <RiArrowLeftSLine size={22} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                className="services-carousel__button"
+                onClick={goToNextServices}
+                aria-label="Next services"
+              >
+                <RiArrowRightSLine size={22} aria-hidden="true" />
+              </button>
+            </div> */}
+          </div>
+
+          <div className="services-carousel">
+            <div
+              className="services-carousel__track"
+              style={{
+                transform: `translateX(-${activeServiceIndex * serviceSlideWidth}%)`,
+              }}
+            >
+              {SERVICES.map((service) => (
+                <div
                   key={service.id}
-                  to={`/services/${service.id}`}
-                  className="service-card service-card--linked"
+                  className="services-carousel__slide"
+                  style={{ flexBasis: `${serviceSlideWidth}%` }}
                 >
-                  <h3>{service.title}</h3>
-                  <p>{service.shortDesc}</p>
-                  <span className="service-card__cta">Learn more →</span>
-                </Link>
-              );
-            })}
+                  <Link
+                    to={`/services/${service.id}`}
+                    className="service-card service-card--linked service-card--media"
+                  >
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="service-card__img"
+                    />
+                    <div className="service-card__header">
+                      <h3>{service.title}</h3>
+                    </div>
+                    <p>{service.shortDesc}</p>
+                    <span className="service-card__cta">Learn more →</span>
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

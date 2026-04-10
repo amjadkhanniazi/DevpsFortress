@@ -12,8 +12,8 @@ export default function HeroSection() {
   const pointerRef = useRef({ x: 0, y: 0 });
   const scrollProgressRef = useRef(0);
   const [liteMode, setLiteMode] = useState(false);
-  const [projectionReady, setProjectionReady] = useState(false);
-  const [headlineReady, setHeadlineReady] = useState(false);
+  const [projectionReady, setProjectionReady] = useState(true);
+  const [headlineReady, setHeadlineReady] = useState(true);
 
   const navigate = useNavigate();
 
@@ -105,7 +105,7 @@ export default function HeroSection() {
         <div className="hero-overlay">
           <motion.p
             className="hero-tagline"
-            initial={{ opacity: 0, y: 14, filter: 'blur(10px)' }}
+            initial={false}
             animate={
               projectionReady
                 ? { opacity: 1, y: 0, filter: 'blur(0px)' }
@@ -118,7 +118,7 @@ export default function HeroSection() {
 
           <motion.h1
             className={`hero-heading${headlineReady ? ' hero-heading--pulse' : ''}`}
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={
               headlineReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
             }
@@ -129,7 +129,7 @@ export default function HeroSection() {
 
           <motion.p
             className="hero-subtitle"
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={
               headlineReady ? { opacity: 0.95, y: 0 } : { opacity: 0, y: 20 }
             }
@@ -140,7 +140,7 @@ export default function HeroSection() {
 
           <motion.div
             className="hero-cta-row"
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={false}
             animate={
               headlineReady
                 ? { opacity: 1, scale: 1, y: 0 }
