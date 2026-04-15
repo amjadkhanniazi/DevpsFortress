@@ -6,7 +6,7 @@ import {
   FaWhatsapp,
 } from 'react-icons/fa';
 import { RiCodeSSlashLine } from 'react-icons/ri';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const initialFormState = {
   name: '',
@@ -14,6 +14,36 @@ const initialFormState = {
   company: '',
   message: '',
 };
+
+// Custom hook for scroll animations
+function useScrollReveal() {
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return [ref, isVisible];
+}
 
 const CONTACT_LINKS = [
   {
@@ -51,6 +81,7 @@ const CONTACT_LINKS = [
 export default function HomeContactSection() {
   const [formData, setFormData] = useState(initialFormState);
   const [submitted, setSubmitted] = useState(false);
+  const [contactRef, contactVisible] = useScrollReveal();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -64,34 +95,67 @@ export default function HomeContactSection() {
   };
 
   return (
-    <section id="contact" className="info-section info-section--cta">
-      <div className="section-shell section-shell--cta contact-layout">
-        <div className="contact-panel">
-          <p className="section-kicker">Contact</p>
-          <h2 className="section-title">
+    <section
+      id="contact"
+      className="info-section info-section--cta"
+      ref={contactRef}
+    >
+      <div
+        className={`section-shell section-shell--cta contact-layout ${contactVisible ? 'scroll-reveal' : ''}`}
+      >
+        <div
+          className="contact-panel"
+          style={{ animationDelay: contactVisible ? '0s' : 'unset' }}
+        >
+          <p
+            className="section-kicker"
+            style={{ animationDelay: contactVisible ? '0s' : 'unset' }}
+          >
+            Contact
+          </p>
+          <h2
+            className="section-title"
+            style={{ animationDelay: contactVisible ? '0.1s' : 'unset' }}
+          >
             <RiCodeSSlashLine size={30} /> Contact Us
           </h2>
-          <p className="section-copy">Reach out using any channel below.</p>
+          <p
+            className="section-copy"
+            style={{ animationDelay: contactVisible ? '0.2s' : 'unset' }}
+          >
+            Reach out using any channel below.
+          </p>
 
           {/* ✅ Unified Social Icons */}
           <div className="contact-links">
-            {CONTACT_LINKS.map(({ label, icon: Icon, href, hoverColor }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="social-icon-btn"
-                style={{ '--hover-color': hoverColor }}
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+            {CONTACT_LINKS.map(
+              ({ label, icon: Icon, href, hoverColor }, index) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="social-icon-btn"
+                  style={{
+                    '--hover-color': hoverColor,
+                    animationDelay: contactVisible
+                      ? `${0.3 + index * 0.08}s`
+                      : 'unset',
+                  }}
+                >
+                  <Icon size={18} />
+                </a>
+              ),
+            )}
           </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form
+          className="contact-form"
+          onSubmit={handleSubmit}
+          style={{ animationDelay: contactVisible ? '0.2s' : 'unset' }}
+        >
           <label>
             Full Name
             <input

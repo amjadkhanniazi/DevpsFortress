@@ -1,12 +1,5 @@
-﻿import { useEffect, useState } from 'react';
-import {
-  RiAlertLine,
-  RiArrowLeftSLine,
-  RiArrowRightSLine,
-  RiCodeSSlashLine,
-  RiCpuLine,
-  RiShieldLine,
-} from 'react-icons/ri';
+﻿import { useEffect, useState, useRef } from 'react';
+import { RiCodeSSlashLine, RiCpuLine, RiShieldLine } from 'react-icons/ri';
 import {
   SiAnsible,
   SiDocker,
@@ -20,6 +13,36 @@ import { Link } from 'react-router-dom';
 import SERVICES from '../../data/services';
 import { fortressContent } from '../../content/devopsFortressContent';
 
+// Custom hook for scroll animations
+function useScrollReveal() {
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return [ref, isVisible];
+}
+
 const TECH_STACK_BADGES = [
   { label: 'GitHub Actions', Icon: SiGithubactions },
   { label: 'GitLab', Icon: SiGitlab },
@@ -31,61 +54,39 @@ const TECH_STACK_BADGES = [
 ];
 
 export default function ContentSections() {
-  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
-  const [cardsPerView, setCardsPerView] = useState(3);
-
-  useEffect(() => {
-    const updateCardsPerView = () => {
-      if (window.innerWidth <= 720) {
-        setCardsPerView(1);
-        return;
-      }
-
-      if (window.innerWidth <= 1080) {
-        setCardsPerView(2);
-        return;
-      }
-
-      setCardsPerView(3);
-    };
-
-    updateCardsPerView();
-    window.addEventListener('resize', updateCardsPerView);
-
-    return () => window.removeEventListener('resize', updateCardsPerView);
-  }, []);
-
-  useEffect(() => {
-    const maxIndex = Math.max(SERVICES.length - cardsPerView, 0);
-    setActiveServiceIndex((currentIndex) => Math.min(currentIndex, maxIndex));
-  }, [cardsPerView]);
-
-  const maxServiceIndex = Math.max(SERVICES.length - cardsPerView, 0);
-  const serviceSlideWidth = 100 / cardsPerView;
-
-  const goToPreviousServices = () => {
-    setActiveServiceIndex((currentIndex) =>
-      currentIndex === 0 ? maxServiceIndex : currentIndex - 1,
-    );
-  };
-
-  const goToNextServices = () => {
-    setActiveServiceIndex((currentIndex) =>
-      currentIndex >= maxServiceIndex ? 0 : currentIndex + 1,
-    );
-  };
+  const [servicesRef, servicesVisible] = useScrollReveal();
+  const [aboutRef, aboutVisible] = useScrollReveal();
+  const [platformRef, platformVisible] = useScrollReveal();
+  const [securityRef, securityVisible] = useScrollReveal();
+  const [serviceModelRef, serviceModelVisible] = useScrollReveal();
 
   return (
     <div className="content-flow">
-      <section id="about" className="info-section">
-        <div className="section-shell">
-          <p className="section-kicker">{fortressContent.about.kicker}</p>
-          <h2 className="section-title">
+      <section id="about" className="info-section" ref={aboutRef}>
+        <div className={`section-shell ${aboutVisible ? 'scroll-reveal' : ''}`}>
+          <p
+            className="section-kicker"
+            style={{ animationDelay: aboutVisible ? '0s' : 'unset' }}
+          >
+            {fortressContent.about.kicker}
+          </p>
+          <h2
+            className="section-title"
+            style={{ animationDelay: aboutVisible ? '0.1s' : 'unset' }}
+          >
             <RiShieldLine size={30} aria-hidden="true" />{' '}
             {fortressContent.about.title}
           </h2>
-          {fortressContent.about.body.map((paragraph) => (
-            <p key={paragraph} className="section-copy">
+          {fortressContent.about.body.map((paragraph, index) => (
+            <p
+              key={paragraph}
+              className="section-copy"
+              style={{
+                animationDelay: aboutVisible
+                  ? `${0.2 + index * 0.1}s`
+                  : 'unset',
+              }}
+            >
               {paragraph}
             </p>
           ))}
@@ -102,39 +103,21 @@ export default function ContentSections() {
                 Core Delivery Areas
               </h2>
             </div>
-
-            {/* <div className="services-carousel__controls">
-              <button
-                type="button"
-                className="services-carousel__button"
-                onClick={goToPreviousServices}
-                aria-label="Previous services"
-              >
-                <RiArrowLeftSLine size={22} aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                className="services-carousel__button"
-                onClick={goToNextServices}
-                aria-label="Next services"
-              >
-                <RiArrowRightSLine size={22} aria-hidden="true" />
-              </button>
-            </div> */}
           </div>
 
-          <div className="services-carousel">
+          <div className="services-carousel" ref={servicesRef}>
             <div
-              className="services-carousel__track"
-              style={{
-                transform: `translateX(-${activeServiceIndex * serviceSlideWidth}%)`,
-              }}
+              className={`services-carousel__track ${servicesVisible ? 'scroll-reveal' : ''}`}
             >
-              {SERVICES.map((service) => (
+              {SERVICES.map((service, index) => (
                 <div
                   key={service.id}
                   className="services-carousel__slide"
-                  style={{ flexBasis: `${serviceSlideWidth}%` }}
+                  style={{
+                    animationDelay: servicesVisible
+                      ? `${index * 0.1}s`
+                      : 'unset',
+                  }}
                 >
                   <Link
                     to={`/services/${service.id}`}
@@ -158,16 +141,34 @@ export default function ContentSections() {
         </div>
       </section>
 
-      <section id="platform" className="info-section">
-        <div className="section-shell">
-          <p className="section-kicker">Technology Index</p>
-          <h2 className="section-title">
+      <section id="platform" className="info-section" ref={platformRef}>
+        <div
+          className={`section-shell ${platformVisible ? 'scroll-reveal' : ''}`}
+        >
+          <p
+            className="section-kicker"
+            style={{ animationDelay: platformVisible ? '0s' : 'unset' }}
+          >
+            Technology Index
+          </p>
+          <h2
+            className="section-title"
+            style={{ animationDelay: platformVisible ? '0.1s' : 'unset' }}
+          >
             <RiCpuLine size={30} aria-hidden="true" /> Advanced Capabilities
           </h2>
           <div className="capability-list">
-            {TECH_STACK_BADGES.map(({ label, Icon }) => {
+            {TECH_STACK_BADGES.map(({ label, Icon }, index) => {
               return (
-                <div key={label} className="capability-pill">
+                <div
+                  key={label}
+                  className="capability-pill"
+                  style={{
+                    animationDelay: platformVisible
+                      ? `${0.2 + index * 0.08}s`
+                      : 'unset',
+                  }}
+                >
                   <Icon size={16} aria-hidden="true" /> {label}
                 </div>
               );
@@ -176,30 +177,75 @@ export default function ContentSections() {
         </div>
       </section>
 
-      <section id="security" className="info-section info-section--alt">
-        <div className="section-shell">
-          <p className="section-kicker">Why Teams Trust Us</p>
-          <h2 className="section-title">
+      <section
+        id="security"
+        className="info-section info-section--alt"
+        ref={securityRef}
+      >
+        <div
+          className={`section-shell ${securityVisible ? 'scroll-reveal' : ''}`}
+        >
+          <p
+            className="section-kicker"
+            style={{ animationDelay: securityVisible ? '0s' : 'unset' }}
+          >
+            Why Teams Trust Us
+          </p>
+          <h2
+            className="section-title"
+            style={{ animationDelay: securityVisible ? '0.1s' : 'unset' }}
+          >
             Built for Security, Speed, and Compliance
           </h2>
           <ul className="trust-list">
-            {fortressContent.trustPoints.map((point) => (
-              <li key={point}>{point}</li>
+            {fortressContent.trustPoints.map((point, index) => (
+              <li
+                key={point}
+                style={{
+                  animationDelay: securityVisible
+                    ? `${0.2 + index * 0.1}s`
+                    : 'unset',
+                }}
+              >
+                {point}
+              </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section id="service-model" className="info-section">
-        <div className="section-shell">
-          <p className="section-kicker">Service Model</p>
-          <h2 className="section-title">
+      <section
+        id="service-model"
+        className="info-section"
+        ref={serviceModelRef}
+      >
+        <div
+          className={`section-shell ${serviceModelVisible ? 'scroll-reveal' : ''}`}
+        >
+          <p
+            className="section-kicker"
+            style={{ animationDelay: serviceModelVisible ? '0s' : 'unset' }}
+          >
+            Service Model
+          </p>
+          <h2
+            className="section-title"
+            style={{ animationDelay: serviceModelVisible ? '0.1s' : 'unset' }}
+          >
             <RiShieldLine size={30} aria-hidden="true" /> How We Deliver Results
           </h2>
           <div className="service-grid">
-            {fortressContent.serviceHighlights.map((item) => {
+            {fortressContent.serviceHighlights.map((item, index) => {
               return (
-                <article key={item.title} className="service-card">
+                <article
+                  key={item.title}
+                  className="service-card"
+                  style={{
+                    animationDelay: serviceModelVisible
+                      ? `${0.2 + index * 0.1}s`
+                      : 'unset',
+                  }}
+                >
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </article>
