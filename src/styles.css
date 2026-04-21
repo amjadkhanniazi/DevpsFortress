@@ -998,7 +998,7 @@ main {
   flex-wrap: wrap;
   gap: 14px;
   align-items: center;
-  margin-top: 6px;
+  margin-top: -4px;
 }
 
 .social-icon-btn {
