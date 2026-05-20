@@ -159,7 +159,7 @@ export default function HeroSection() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              Launch Fortress
+              {fortressContent.hero.primaryCta}
             </motion.a>
 
             <motion.button
@@ -168,7 +168,7 @@ export default function HeroSection() {
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/services')}
             >
-              View Blueprint
+              {fortressContent.hero.secondaryCta}
             </motion.button>
           </motion.div>
         </div>

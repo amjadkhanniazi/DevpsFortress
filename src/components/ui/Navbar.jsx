@@ -189,11 +189,11 @@ export default function Navbar() {
             </div>
             {isHomeRoute ? (
               <a href="#contact" className="nav-cta">
-                Get Access
+                Free Consultation
               </a>
             ) : (
               <Link to="/#contact" className="nav-cta">
-                Get Access
+                Free Consultation
               </Link>
             )}
           </div>
@@ -320,7 +320,7 @@ export default function Navbar() {
                     className="mobile-menu__cta"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Get Access
+                    Free Consultation
                   </a>
                 ) : (
                   <Link
@@ -328,7 +328,7 @@ export default function Navbar() {
                     className="mobile-menu__cta"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Get Access
+                    Free Consultation
                   </Link>
                 )}
               </motion.div>

@@ -426,10 +426,10 @@ main {
 
 .hero-subtitle {
   margin: 0;
-  max-width: 62ch;
+  max-width: 78ch;
   color: var(--text-muted);
-  font-size: clamp(0.9rem, 1.8vw, 1.13rem);
-  line-height: 1.65;
+  font-size: clamp(0.86rem, 1.45vw, 1rem);
+  line-height: 1.62;
 }
 
 .hero-cta-row {
@@ -589,6 +589,44 @@ main {
   line-height: 1.66;
 }
 
+.service-grid--azure {
+  align-items: stretch;
+}
+
+.service-card--detailed {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.service-card__bullets {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.service-card__bullets li {
+  position: relative;
+  padding-left: 18px;
+  color: #bfd0d5;
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+.service-card__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+}
+
 .docs-grid {
   display: grid;
   gap: 16px;
@@ -632,6 +670,10 @@ main {
   font-size: 0.9rem;
 }
 
+.capability-list--dense {
+  max-width: 980px;
+}
+
 .trust-list {
   margin: 18px 0 0;
   padding: 0;
@@ -670,6 +712,46 @@ main {
   margin: 10px 0 0;
   color: #a8bcc2;
   line-height: 1.65;
+}
+
+.setup-steps {
+  margin-top: 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.setup-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.setup-step__badge {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(0, 240, 255, 0.34);
+  border-radius: 12px;
+  background: rgba(0, 240, 255, 0.1);
+  color: #dffcff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+
+.final-cta {
+  text-align: center;
+}
+
+.final-cta .section-copy {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-cta .cta-row {
+  justify-content: center;
 }
 
 .info-section--cta {
@@ -1305,7 +1387,9 @@ main {
 .section-shell.scroll-reveal .section-copy,
 .section-shell.scroll-reveal .service-card,
 .section-shell.scroll-reveal .capability-pill,
-.section-shell.scroll-reveal .trust-list li {
+.section-shell.scroll-reveal .trust-list li,
+.section-shell.scroll-reveal .faq-item,
+.section-shell.scroll-reveal .cta-row {
   opacity: 0;
   animation: fadeInUp 0.6s ease forwards;
 }

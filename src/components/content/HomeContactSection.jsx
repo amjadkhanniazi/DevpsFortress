@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fa';
 import { RiCodeSSlashLine } from 'react-icons/ri';
 import { useState, useRef, useEffect } from 'react';
+import { fortressContent } from '../../content/devopsFortressContent';
 
 const initialFormState = {
   name: '',
@@ -111,22 +112,21 @@ export default function HomeContactSection() {
             className="section-kicker"
             style={{ animationDelay: contactVisible ? '0s' : 'unset' }}
           >
-            Contact
+            {fortressContent.contact.kicker}
           </p>
           <h2
             className="section-title"
             style={{ animationDelay: contactVisible ? '0.1s' : 'unset' }}
           >
-            <RiCodeSSlashLine size={30} /> Contact Us
+            <RiCodeSSlashLine size={30} /> {fortressContent.contact.title}
           </h2>
           <p
             className="section-copy"
             style={{ animationDelay: contactVisible ? '0.2s' : 'unset' }}
           >
-            Reach out using any channel below.
+            {fortressContent.contact.description}
           </p>
 
-          {/* ✅ Unified Social Icons */}
           <div className="contact-links">
             {CONTACT_LINKS.map(
               ({ label, icon: Icon, href, hoverColor }, index) => (
@@ -199,7 +199,7 @@ export default function HomeContactSection() {
               rows={5}
               value={formData.message}
               onChange={handleChange}
-              placeholder="We need to secure Kubernetes deployments..."
+              placeholder={fortressContent.contact.messagePlaceholder}
             />
           </label>
 
@@ -209,7 +209,7 @@ export default function HomeContactSection() {
 
           {submitted && (
             <p className="contact-form__success">
-              Request received. We will contact you shortly.
+              {fortressContent.contact.success}
             </p>
           )}
         </form>

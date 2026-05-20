@@ -61,8 +61,8 @@ export default function Footer() {
           <div>
             <h3>DevOps Fortress</h3>
             <p>
-              Secure DevOps and cloud security delivery for modern engineering
-              teams.
+              Azure DevOps service connection setup, CI/CD automation, and
+              secure cloud delivery.
             </p>
           </div>
         </div>
